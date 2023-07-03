@@ -1,23 +1,70 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Login from '../components/Login/Login.vue'
+import AdminDashboard from "../components/Dashboards/Admin/Dashboard.vue"
+import CreateQuiz from "../components/Dashboards/Admin/markup/CreateQuiz.vue"
+import UsersDashboard from "../components/Dashboards/Users/Dashboard.vue"
+import QuestionSession from "../components/Dashboards/Users/markup/QuestionSession.vue"
+import Result from "../components/Result.vue"
 
 Vue.use(VueRouter)
 
 const routes = [
+  { path: '/', redirect: '/login' },
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/signup',
+    name: 'signup',
+    component: () => import( '../components/Signup/Signup.vue')
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: {
+      render(c) {
+        return c('router-view')
+      }
+    },
+    children: [
+      {
+        path: "admin",
+        name: "admin",
+        component: AdminDashboard,
+        // props: true,
+        // children: [
+        //   {
+        //     path: "create-quiz",
+        //     name: "create-quiz",
+        //     component: CreateQuiz
+        //   }
+        // ]
+      },
+      {
+        path: "admin/create-quiz",
+        name: "create-quiz",
+        component: CreateQuiz
+      },
+      {
+        path: "users",
+        name: "users",
+        component: UsersDashboard,
+      },
+      {
+        path: "users/:id",
+        name: "question-session",
+        component: QuestionSession
+      }
+    ]
+  },
+  {
+    path: "/result",
+    name: "result",
+    component: Result
+  },
 ]
 
 const router = new VueRouter({

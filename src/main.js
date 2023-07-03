@@ -1,9 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import Jumbotron from "./slots/JumbotronSlot.vue"
+import router from './router/index'
+import store from "./store/index.js"
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
+
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
+
+Vue.component('jumbotron-slot', Jumbotron)
 
 new Vue({
   router,
