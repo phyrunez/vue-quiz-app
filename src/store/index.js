@@ -18,6 +18,6 @@ export default new Vuex.Store({
   modules: {
     users: users,
     admin: admin,
-    auth
+    auth: auth
   }
 })

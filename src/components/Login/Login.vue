@@ -41,6 +41,7 @@ export default {
     },
     methods: {
         login() {
+            
             try {
                 this.$store.dispatch('login', {
                     email: this.email,
@@ -49,37 +50,19 @@ export default {
                 })
 
                 if(this.userType === 'user') {
+                    this.$store.commit("users/setAuthentication", true);
                     alert(this.success_msg)
-                    this.$router.push("dashboard/users")
+                    this.$router.replace({ name: "users" });
                 }else {
+                    localStorage.setItem('CurrentAdmin', this.email)
+                    this.$store.commit("admin/setAuthentication", true);
                     alert(this.success_msg)
-                    this.$router.push("dashboard/admin")
+                    this.$router.replace({ name: "admin" });
                 }
             }catch {err => 
-                console.log(err.message)
+                alert(err.message)
             }
 
-            // if (this.userType === 'user') {
-            //     this.$store.dispatch('users/newUsers', {
-            //         email: this.email,
-            //         password: this.password,
-            //         userType: this.userType
-            //     })
-
-            //     alert(this.success_msg)
-            //     this.$router.push("dashboard/users")
-            // }
-
-            // if (this.userType === 'admin') {
-            //     this.$store.dispatch('admin/newAdmin', {
-            //         email: this.email,
-            //         password: this.password,
-            //         userType: this.userType
-            //     })
-
-            //     alert(this.success_msg)
-            //     this.$router.push("dashboard/users")
-            // }
         }
     },
     mounted() {

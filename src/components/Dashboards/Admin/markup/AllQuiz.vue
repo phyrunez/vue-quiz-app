@@ -3,8 +3,8 @@
         <div class="summary_class">
             <div class="row">
                 <div class="users col-4">
-                    <p>Registered Users</p>
-                    <span>10</span>
+                    <p>Application Users</p>
+                    <span>{{ allUsers }}</span>
                 </div>
                 <div class="session col-4">
                     <p>Available Quiz Session</p>
@@ -12,7 +12,7 @@
                 </div>
                 <div class="admin col-4">
                     <p>Current Admin</p>
-                    <span>Jude@gmail.com</span>
+                    <span>{{ currentAdmin }}</span>
                 </div>
             </div>
             <div>
@@ -32,11 +32,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="sess in session" :key="sess">
-                            <th scope="row">{{ sess.id + 1 }}</th>
+                            <th scope="row">{{ sess.id}}</th>
                             <td>{{ sess.difficulty }}</td>
                             <td>{{ sess.num_of_questions }}</td>
                             <td>{{ sess.options_type }}</td>
-                            <td>{{ sess.category }}</td>
+                            <td>{{ sess.category_name }}</td>
                             <td v-if="sess.isTimed === true">
                                 <div :class="{ 'tag_class_timed': timed }">Timed</div>
                             </td>
@@ -56,23 +56,33 @@
 
 export default {
     data() {
-        return {
-            choice: [],
+        return {   
             session: null,
             timed: true,
+            currentAdmin: "",
+            allUsers: "",
+            
         }
     },
     computed: {
         
     },
+    
     mounted() {
-        let choice = JSON.parse(localStorage.getItem('UserChoice'))
-        this.choice.push(choice)
-        console.log(this.choice)
+        let currentAdmin = localStorage.getItem('CurrentAdmin')
+        console.log(currentAdmin)
+        this.currentAdmin = currentAdmin
 
         let session = JSON.parse(localStorage.getItem('Quiz Session'))
         this.session = session
         console.log(this.session)
+
+        console.log(this.$store.getters['users/allUsers'])
+        let chaii = this.$store.getters['users/allUsers']
+        let newArr = chaii.map(item => { console.log(Object.values(item)) })
+        
+        this.allUsers = newArr.length + 1
+        
     }
 }
 </script>

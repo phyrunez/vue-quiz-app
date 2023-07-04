@@ -1,8 +1,13 @@
 const state = {
-    allAdmin: []
+    allAdmin: [],
+    adminAuthState: false
 }
 
 const mutations = {
+    setAuthentication(state, status) {
+        state.adminAuthState = status;
+    },
+
     async newAdmin(_, payload) {
         await fetch("https://vue-quiz-app-1c64b-default-rtdb.firebaseio.com/quiz-admin.json",{
             method: 'POST',
@@ -46,6 +51,9 @@ const actions = {
 const getters = {
     allAdmin(state) {
         return state.allAdmin
+    },
+    adminAuthState(state) {
+        return state.adminAuthState
     }
 }
 

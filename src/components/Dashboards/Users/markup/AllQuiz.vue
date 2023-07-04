@@ -19,11 +19,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="sess in session" :key="sess">
-                            <th scope="row">{{ sess.id + 1 }}</th>
+                            <th scope="row">{{ sess.id }}</th>
                             <td>{{ sess.difficulty }}</td>
                             <td>{{ sess.num_of_questions }}</td>
                             <td>{{ sess.options_type }}</td>
-                            <td>{{ sess.category }}</td>
+                            <td>{{ sess.category_name }}</td>
                             <td v-if="sess.isTimed === true">
                                 <div :class="{ 'tag_class_timed': timed }">Timed</div>
                             </td>
@@ -31,10 +31,10 @@
                                 <div :class="{'tag_class_untimed': timed }">Untimed</div>
                             </td>
                             <td v-if="sess.isTimed === true">
-                                <button class="div_curs" :class="{ 'tag_class_timed': timed }" @click="startTimedQuiz(sess.id + 1, sess)">Start</button>
+                                <button class="div_curs" :class="{ 'tag_class_timed': timed }" @click="startTimedQuiz(sess.id, sess)">Start</button>
                             </td>
                             <td v-else-if="sess.isTimed === false">
-                                <button class="div_curs" :class="{ 'tag_class_untimed': timed }" @click="startUntimedQuiz(sess.id + 1, sess)">Start</button>
+                                <button class="div_curs" :class="{ 'tag_class_untimed': timed }" @click="startUntimedQuiz(sess.id, sess)">Start</button>
                             </td>
                         </tr>
                     
@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import quizClass from "../../../../classes/quizClass"
-import questionsClass from "../../../../classes/questionsClass"
 
 export default {
     data() {
@@ -86,12 +84,6 @@ export default {
         let session = JSON.parse(localStorage.getItem('Quiz Session'))
         this.session = session
         console.log(this.session)
-
-        // let user_choice = JSON.parse(localStorage.getItem('UserChoice'))
-        // let u = user_choice.map(item => { return item.category })
-        // this.user_choice = u[0]
-        // console.log(this.user_choice)
-
     }
 }
 </script>

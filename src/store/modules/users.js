@@ -1,19 +1,16 @@
 const state = {
-    allUsers: []
+    allUsers: [],
+    userAuthState: false
 }
 
 const mutations = {
-    // newUsers(state, payload) {
-    //     state.email = payload.email;
-    //     state.password = payload.password;
-    //     state.userType = payload.userType;
-    // },
-    // allUsers(state, payload) {
-    //     state.allUsers.push(payload)
-    // }
-     async newUsers(state, payload) {
-        // const userId = context.rootGetters.userId
-        // const token = context.rootGetters.token
+    
+    setAuthentication(state, status) {
+        state.userAuthState = status;
+    },
+
+    async newUsers(state, payload) {
+        
         await fetch("https://vue-quiz-app-1c64b-default-rtdb.firebaseio.com/quiz-users.json", {
             method: 'POST',
             body: JSON.stringify({
@@ -69,6 +66,9 @@ const actions = {
 const getters = {
     allUsers(state) {
         return state.allUsers
+    },
+    userAuthState(state) {
+        return state.userAuthState
     }
 }
 

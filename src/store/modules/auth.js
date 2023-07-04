@@ -24,6 +24,11 @@ const actions = {
             })
         })
         .then(resp => {
+            if(resp.status === 400) {
+                const error = "Something went wrong, Please Check that your Login details are correct";
+                alert(error)
+                throw new Error(error);
+            }
             const data = resp.json()
             return data
         })
@@ -50,6 +55,11 @@ const actions = {
             })
         })
         .then(resp => {
+            if(resp.status === 400) {
+                const error = "Something went wrong, Please Check that you are not using a registered details";
+                alert(error)
+                throw new Error(error);
+            }
             const data = resp.json()
             return data
         })

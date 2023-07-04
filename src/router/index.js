@@ -34,6 +34,13 @@ const routes = [
         path: "admin",
         name: "admin",
         component: AdminDashboard,
+        // beforeEnter: (to, from, next) => {
+        //   if(state.rootState.) {
+        //       next(false);
+        //   } else {
+        //       next();
+        //   }
+        // }
         // props: true,
         // children: [
         //   {
@@ -46,7 +53,14 @@ const routes = [
       {
         path: "admin/create-quiz",
         name: "create-quiz",
-        component: CreateQuiz
+        component: CreateQuiz,
+        // beforeEnter: (to, from, next) => {
+        //   if(this.$store.getters['users/userAuthState']) {
+        //       next(false);
+        //   } else {
+        //       next();
+        //   }
+        // }
       },
       {
         path: "users",

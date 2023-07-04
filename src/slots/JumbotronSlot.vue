@@ -9,7 +9,7 @@
     background: #0c7988;
     color: white;
     padding: 25px;
-    width: 25%;
+    width: 50%;
     margin: 13rem auto 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;

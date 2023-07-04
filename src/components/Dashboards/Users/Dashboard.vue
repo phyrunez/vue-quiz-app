@@ -10,7 +10,7 @@
             </div>
             <all-quiz></all-quiz>
             <router-view></router-view>
-            <!-- <create-quiz></create-quiz> -->
+            
         </div>
     </div>
 </template>
@@ -19,14 +19,12 @@
 import TheHeader from '../../../UI/TheHeader'
 import Sidebar from "./markup/Sidebar.vue"
 import AllQuiz from "./markup/AllQuiz"
-// import CreateQuiz from "./markup/CreateQuiz"
 
 export default {
     components: {
         'the-header': TheHeader,
         'sidebar': Sidebar,
         'all-quiz': AllQuiz,
-        // "create-quiz": CreateQuiz
     },
     data() {
         return {

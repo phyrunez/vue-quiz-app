@@ -17,24 +17,24 @@
                     <h4>Kindly select your questions preference to get started!!!</h4>
                     <div class="question_selector">
                             <select name="" id="num_selector" v-model="questionSet">
-                                <option v-for="opt in selectedQuestionOption" :value="opt">{{ opt }}</option>
+                                <option v-for="opt in selectedQuestionOption" :value="opt" label="1">{{ opt }}</option>
                             </select>
                             <select name="" id="category_selector" v-model="categorySet" @change="categorySet">
-                                <option v-for="opt in selectedCategoryOption" :value="opt.id">{{ opt.name }}</option>
+                                <option v-for="opt in selectedCategoryOption" :value="opt.id" label="Politics">{{ opt.name }}</option>
                                
                             </select>
                             <select name="" id="difficulty_selector" v-model="difficultySet">
-                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt }}</option>
+                                <option v-for="opt in selectedDifficultyOption" :value="opt" label="medium">{{ opt }}</option>
                             </select>
                             <select name="" id="option-type_selector" v-model="optionsTypeSet">
-                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt }}</option>
+                                <option v-for="opt in selectedOptionType" :value="opt" label="multiple">{{ opt }}</option>
                             </select>
                     </div>
                     <div class="textPart_input">
                             <input type="checkbox" v-model="isTimed" name="is-timed" id="is-timed">
                             <label for="is-timed" class="selector-label">Time Quiz</label>
                     </div>
-                    <button class="btn_submit" :class="{}" @click="startQuiz" id="start_quiz">{{ btnState }}</button>
+                    <button class="btn_submit" @click="createQuizSession" id="start_quiz">{{ btnState }}</button>
                 </div>       
             </main>
         </div>
@@ -72,34 +72,36 @@ export default {
         }
     },
     methods: {
-        startQuiz: async function() {
-            //call a class method
+        createQuizSession: async function() {
+            
             this.btnState = "Creating..."
 
             try {
-                await this.quiz.getQuestionsFromApi()
+                const url =  `https://opentdb.com/api.php?amount=${this.questionSet}&category=${this.categorySet}&difficulty=${this.difficultySet}&type=${this.optionsTypeSet}`
+                const questions = await this.quiz.getQuestionsFromApiGenerated(url)
                 this.btnState = "Create Quiz"
-                
-                const getDataFromLocal = JSON.parse(localStorage.getItem('UserChoice'))
-                if(getDataFromLocal.length > 0 ) {
-                    alert('New Quiz Session added!!, you can view all Quiz Session')
-                    console.log('curLength', this.quizSession.length)
-                    let GeneratedAPI = {
-                        id: this.quizSession.length += 0,
-                        num_of_questions: this.questionSet,
-                        category: this.categorySet,
-                        difficulty: this.difficultySet,
-                        options_type: this.optionsTypeSet,
-                        isTimed: this.isTimed,
-                        url: `https://opentdb.com/api.php?amount=${this.questionSet}&category=${this.categorySet}&difficulty=${this.difficultySet}&type=${this.optionsTypeSet}`
-                    }
-                    console.log(GeneratedAPI)
-                    this.quizSession.push({...GeneratedAPI})
-                    console.log(this.quizSession)
-                    localStorage.setItem('Quiz Session', JSON.stringify(this.quizSession))
-                }else {
-                    alert('The Question combination you set is unavailable, please select another one')
+
+                if (!questions.length) return alert('The Question combination you set is unavailable, please select another one') 
+                console.log(this.selectedCategoryOption)
+                let sessions = localStorage.getItem('Quiz Session')
+                if (sessions) sessions = JSON.parse(sessions)
+                else sessions = []
+                if (!Array.isArray(sessions)) sessions = []
+
+                let GeneratedAPI = {
+                    id: sessions.length + 1,
+                    num_of_questions: this.questionSet,
+                    category:  this.categorySet, 
+                    category_name: this.selectedCategoryOption.find(item => item.id === this.categorySet)?.name,
+                    difficulty: this.difficultySet,
+                    options_type: this.optionsTypeSet,
+                    isTimed: this.isTimed,
+                    url
                 }
+                
+                sessions.push(GeneratedAPI)
+                localStorage.setItem('Quiz Session', JSON.stringify(sessions))
+                window.alert("Session created successfully")
             }catch(err) {
                 this.btnState = "Create Quiz"
                 console.log(err.message)
@@ -125,6 +127,7 @@ export default {
                 const data = await res.json()
                 let selectCategoryOption = data?.trivia_categories.map(item => { return item })
                 this.selectedCategoryOption = selectCategoryOption
+                this.categorySet = this.selectedCategoryOption.find(item => item.id === this.categorySet)?.name
             } catch (err) {
                 console.log(err)
             }
