@@ -16,16 +16,23 @@
                 <div class="textPart">
                     <h4>Kindly select your questions preference to get started!!!</h4>
                     <div class="question_selector">
+                            <label for="cars">Number of questions</label><br>
                             <select name="" id="num_selector" v-model="questionSet">
                                 <option v-for="opt in selectedQuestionOption" :value="opt" label="1">{{ opt }}</option>
-                            </select>
+                            </select><br>
+
+                            <label for="cars">Category</label><br>
                             <select name="" id="category_selector" v-model="categorySet" @change="categorySet">
                                 <option v-for="opt in selectedCategoryOption" :value="opt.id" label="Politics">{{ opt.name }}</option>
                                
-                            </select>
+                            </select><br>
+
+                            <label for="cars">Difficulty</label><br>
                             <select name="" id="difficulty_selector" v-model="difficultySet">
                                 <option v-for="opt in selectedDifficultyOption" :value="opt" label="medium">{{ opt }}</option>
-                            </select>
+                            </select><br>
+
+                            <label for="cars">Options Type</label><br>
                             <select name="" id="option-type_selector" v-model="optionsTypeSet">
                                 <option v-for="opt in selectedOptionType" :value="opt" label="multiple">{{ opt }}</option>
                             </select>
@@ -211,7 +218,7 @@ export default {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     width: 55rem;
     margin: 10px 33rem 0;
-    height: 36.5rem;
+    height: 37.5rem;
     display: flex;
 }
 
@@ -233,7 +240,7 @@ export default {
 }
 
 .imgPart img {
-    margin-top: 84px;
+    margin-top: 90px;
     width: 100%;
     height: 50%;
     border-radius: 0 0 0 10px;
@@ -249,12 +256,15 @@ export default {
 
 .textPart h4 {
     width: 350px;
-    margin: 70px auto;
+    margin: 30px auto;
     font-size: 20px;
     color: white;
     font-weight: bold;
 }
 
+.question_selector {
+    margin-top: 20px;
+}
 .question_selector select {
     width: 21rem;
     margin-bottom: 20px;
@@ -264,6 +274,10 @@ export default {
     appearance: none;
     font-size: 15px;
     border-radius: 10px 0;
+}
+.question_selector label {
+    float: left;
+    margin: 0 0 0 53px
 }
 .btn_submit {
     margin-top: 20px;
