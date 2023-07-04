@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login/Login.vue'
 import AdminDashboard from "../components/Dashboards/Admin/Dashboard.vue"
-import CreateQuiz from "../components/Dashboards/Admin/markup/CreateQuiz.vue"
+import CreateQuiz from "../components/Dashboards/Admin/adminDashboardComponents/CreateQuiz.vue"
 import UsersDashboard from "../components/Dashboards/Users/Dashboard.vue"
-import QuestionSession from "../components/Dashboards/Users/markup/QuestionSession.vue"
+import QuestionSession from "../components/Dashboards/Users/usersDashboardComponents/QuestionSession.vue"
 import Result from "../components/Result.vue"
 
 Vue.use(VueRouter)

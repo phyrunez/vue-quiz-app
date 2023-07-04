@@ -17,8 +17,8 @@
 
 <script>
 import TheHeader from '../../../UI/TheHeader'
-import Sidebar from "./markup/Sidebar.vue"
-import AllQuiz from "./markup/AllQuiz"
+import Sidebar from "./usersDashboardComponents/Sidebar.vue"
+import AllQuiz from "./usersDashboardComponents/AllQuiz"
 
 export default {
     components: {

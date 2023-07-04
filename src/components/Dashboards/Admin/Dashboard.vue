@@ -16,8 +16,8 @@
 
 <script>
 import TheHeader from '../../../UI/TheHeader'
-import Sidebar from "./markup/Sidebar"
-import AllQuiz from "./markup/AllQuiz"
+import Sidebar from "./adminDashboardComponents/Sidebar"
+import AllQuiz from "./adminDashboardComponents/AllQuiz"
 
 export default {
     components: {

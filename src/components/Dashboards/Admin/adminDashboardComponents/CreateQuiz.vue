@@ -75,6 +75,7 @@ export default {
             optionsTypeSet: 'multiple',
             isTimed: false,
             id: 1,
+            url: "",
             btnState: "Create Quiz",
         }
     },
@@ -86,6 +87,7 @@ export default {
             try {
                 const url =  `https://opentdb.com/api.php?amount=${this.questionSet}&category=${this.categorySet}&difficulty=${this.difficultySet}&type=${this.optionsTypeSet}`
                 const questions = await this.quiz.getQuestionsFromApiGenerated(url)
+                // localStorage.setItem('Current Session', url)
                 this.btnState = "Create Quiz"
 
                 if (!questions.length) return alert('The Question combination you set is unavailable, please select another one') 
@@ -95,6 +97,8 @@ export default {
                 else sessions = []
                 if (!Array.isArray(sessions)) sessions = []
 
+                this.url = url
+
                 let GeneratedAPI = {
                     id: sessions.length + 1,
                     num_of_questions: this.questionSet,
@@ -103,7 +107,7 @@ export default {
                     difficulty: this.difficultySet,
                     options_type: this.optionsTypeSet,
                     isTimed: this.isTimed,
-                    url
+                    url: this.url
                 }
                 
                 sessions.push(GeneratedAPI)
