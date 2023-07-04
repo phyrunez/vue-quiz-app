@@ -18,23 +18,23 @@
                     <div class="question_selector">
                             <label for="cars">Number of questions</label><br>
                             <select name="" id="num_selector" v-model="questionSet">
-                                <option v-for="opt in selectedQuestionOption" :value="opt" label="1">{{ opt }}</option>
+                                <option v-for="opt in selectedQuestionOption" :value="opt">{{ opt }}</option>
                             </select><br>
 
                             <label for="cars">Category</label><br>
                             <select name="" id="category_selector" v-model="categorySet" @change="categorySet">
-                                <option v-for="opt in selectedCategoryOption" :value="opt.id" label="Politics">{{ opt.name }}</option>
+                                <option v-for="opt in selectedCategoryOption" :value="opt.id">{{ opt.name }}</option>
                                
                             </select><br>
 
                             <label for="cars">Difficulty</label><br>
                             <select name="" id="difficulty_selector" v-model="difficultySet">
-                                <option v-for="opt in selectedDifficultyOption" :value="opt" label="medium">{{ opt }}</option>
+                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt }}</option>
                             </select><br>
 
                             <label for="cars">Options Type</label><br>
                             <select name="" id="option-type_selector" v-model="optionsTypeSet">
-                                <option v-for="opt in selectedOptionType" :value="opt" label="multiple">{{ opt }}</option>
+                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt }}</option>
                             </select>
                     </div>
                     <div class="textPart_input">
