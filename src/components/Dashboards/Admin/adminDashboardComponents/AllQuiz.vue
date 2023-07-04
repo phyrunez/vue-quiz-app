@@ -60,8 +60,7 @@ export default {
             session: null,
             timed: true,
             currentAdmin: "",
-            allUsers: "",
-            
+            // allUsers: "",
         }
     },
     computed: {
@@ -70,18 +69,17 @@ export default {
     
     mounted() {
         let currentAdmin = localStorage.getItem('CurrentAdmin')
-        console.log(currentAdmin)
+    
         this.currentAdmin = currentAdmin
 
         let session = JSON.parse(localStorage.getItem('Quiz Session'))
         this.session = session
-        console.log(this.session)
 
-        console.log(this.$store.getters['users/allUsers'])
-        let chaii = this.$store.getters['users/allUsers']
-        let newArr = chaii.map(item => { console.log(Object.values(item)) })
+        // console.log(this.$store.getters['users/allUsers'])
+        // let chaii = this.$store.getters['users/allUsers']
+        // let newArr = chaii.map(item => { console.log(Object.values(item)) })
         
-        this.allUsers = newArr.length + 1
+        // this.allUsers = newArr.length + 1
         
     }
 }

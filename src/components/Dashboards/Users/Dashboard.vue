@@ -31,9 +31,7 @@ export default {
             state: true
         }
     },
-    computed: {
-        displayComponent(){}
-    },
+    
 }
 </script>
 

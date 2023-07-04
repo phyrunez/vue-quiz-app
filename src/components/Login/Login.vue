@@ -17,10 +17,6 @@
             <button class="login_btn"><span>Login</span></button>
             <p>Don't have an Account yet? <router-link class="link_active" to='/signup'>Signup</router-link></p>
         </form>
-
-        <!-- <div v-for="user in UsersArr" :key="user">
-            <span>{{ user.email }}</span>
-        </div> -->
     </jumbotron-slot>
 </template>
 
@@ -65,9 +61,6 @@ export default {
 
         }
     },
-    mounted() {
-        console.log(this.$store.dispatch('users/allUsers'))
-        console.log(this.$store.getters['users/allUsers'])
-    }
+    
 }
 </script>

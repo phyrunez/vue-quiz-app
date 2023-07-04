@@ -26,9 +26,6 @@ const mutations = {
 
         state.allUsers.push(payload)
 
-        // context.commit('newUsers', {
-        //     ...payload,
-        // }) 
     },
 
     async allUsers(state) {
@@ -45,21 +42,16 @@ const mutations = {
             const showError = err.message + " - Please check the url and try again"
             console.log(showError)
         })
-
-        // commit('allUsers') 
     }
 }
 
 const actions = {
    newUsers(context, payload) {
         context.commit("newUsers", payload)
-        // state.email = payload.email;
-        // state.password = payload.password;
-        // state.userType = payload.userType;
     },
+
     allUsers(context, data) {
         context.commit('allUsers', data)
-        // state.allUsers.push(payload)
     }
 }
 

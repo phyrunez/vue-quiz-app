@@ -27,7 +27,8 @@ const actions = {
             if(resp.status === 400) {
                 const error = "Something went wrong, Please Check that your Login details are correct";
                 alert(error)
-                throw new Error(error);
+                // throw new Error(error);
+                return
             }
             const data = resp.json()
             return data

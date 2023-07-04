@@ -175,7 +175,6 @@ export default {
             this.btnIsPrevDisabled = true;
             if (this.curQuestionIndex !== 1) this.btnIsPrevDisabled = false;
             if (this.answer) this.btnIsNextDisabled = false
-            
         },
 
         triggerTimer() { 

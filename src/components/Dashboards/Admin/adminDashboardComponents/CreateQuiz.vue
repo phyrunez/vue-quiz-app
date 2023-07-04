@@ -87,11 +87,12 @@ export default {
             try {
                 const url =  `https://opentdb.com/api.php?amount=${this.questionSet}&category=${this.categorySet}&difficulty=${this.difficultySet}&type=${this.optionsTypeSet}`
                 const questions = await this.quiz.getQuestionsFromApiGenerated(url)
-                // localStorage.setItem('Current Session', url)
+                
                 this.btnState = "Create Quiz"
 
                 if (!questions.length) return alert('The Question combination you set is unavailable, please select another one') 
                 console.log(this.selectedCategoryOption)
+
                 let sessions = localStorage.getItem('Quiz Session')
                 if (sessions) sessions = JSON.parse(sessions)
                 else sessions = []
@@ -193,8 +194,6 @@ export default {
             optionsTypeSet: this.optionsTypeSet,
             isTimed: this.isTimed
         })
-        console.log(this.quiz)
-        console.log(this.catName)
     }
 }
 </script>

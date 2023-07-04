@@ -63,27 +63,18 @@ export default {
     },
     methods: {
         startTimedQuiz(id, sess) {
-            console.log(sess.num_of_questions)
-            console.log(sess.url)
             localStorage.setItem('Current Session', sess.url)
-
-            console.log(this.$route.path + "/" + id)
             this.$router.push("users/" + id)
         },
 
         startUntimedQuiz(id, sess) {
-            console.log(sess.num_of_questions)
-            console.log(sess.url)
             localStorage.setItem('Current Session', sess.url)
-
-            console.log(this.$route.path + "/" + id)
             this.$router.push("users/" + id)
         }
     },
     mounted() {
         let session = JSON.parse(localStorage.getItem('Quiz Session'))
         this.session = session
-        console.log(this.session)
     }
 }
 </script>

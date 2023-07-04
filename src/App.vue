@@ -5,10 +5,6 @@
 </template>
 
 <style>
-/* .option label { 
-  font-weight: bold; 
-  padding: 20px 0px;
-} */
 nav {
   padding: 30px;
 }

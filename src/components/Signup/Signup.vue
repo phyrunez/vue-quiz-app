@@ -80,12 +80,7 @@ export default {
             }
         }
     },
-    mounted() {
-        // console.log(this.$store)
-        // console.log(this.$store.dispatch('signup'))
-        // console.log(this.$store.getters["users/allUsers"])
-        // console.log(this.$store.getters["users/allAdmin"])
-    },
+   
     watch: {
         signup(data) {
             this.$store.getters["users/allUsers"] = data
