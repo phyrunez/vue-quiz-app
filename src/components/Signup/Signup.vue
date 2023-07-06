@@ -45,7 +45,7 @@ export default {
         }
     },
     methods: {
-        signup() {
+        async signup() {
             try {
                 this.$store.dispatch('signup', {
                     email: this.email,
@@ -58,13 +58,12 @@ export default {
             }
 
             if(this.userType === 'user') {
-                this.$store.dispatch('users/newUsers', {
+                 this.$store.dispatch('users/newUsers', {
                     email: this.email,
                     password: this.password,
                     userType: this.userType
                 })
-                
-                alert(this.success_msg)
+
                 this.$router.push('dashboard/users')
             }
 
@@ -75,15 +74,16 @@ export default {
                     userType: this.userType
                 })
 
-                alert(this.success_msg)
                 this.$router.push('dashboard/admin')
             }
+                
         }
     },
    
     watch: {
         signup(data) {
             this.$store.getters["users/allUsers"] = data
+
         }
     }
 }

@@ -75,7 +75,7 @@ export default {
         let session = JSON.parse(localStorage.getItem('Quiz Session'))
         this.session = session
 
-        // console.log(this.$store.getters['users/allUsers'])
+        console.log(this.$store.getters['users/allAdmin'])
         // let chaii = this.$store.getters['users/allUsers']
         // let newArr = chaii.map(item => { console.log(Object.values(item)) })
         

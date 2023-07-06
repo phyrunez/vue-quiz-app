@@ -102,4 +102,133 @@ form {
     color: brown
 }
 
+@media screen and (max-width: 1216px) {
+    .jump {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .jump {
+        width: 100%;
+        margin: 5rem auto 0;
+    }
+}
+
+@media screen and (max-width: 913px) {
+    .jump {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 821px) {
+    .jump {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 769px) {
+    .jump {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 583px) {
+    .jump {
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+    #email {
+        margin-left: -80px;
+    }
+    .email {
+        margin: 0 50px 0 10px;
+    }
+    #password { margin: 0 40px 0 -45px; }
+    .password { 
+        margin-left: -20px; 
+        width: 19.8rem;
+    }
+    #user-type { 
+        margin: 16px 35px 0 -25px; 
+        
+    }
+    .user-type { margin: 16px 15px 0 -20px;}
+}
+
+@media screen and (max-width: 541px) {
+    .jump {
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+}
+
+@media screen and (max-width: 516px) {
+    .jump {
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+    #email {
+        margin-left: -120px;
+    }
+    .email {
+        margin: 0 50px 0 -10px;
+        width: 15.8rem;
+    }
+    /* #password { margin: 0 40px 0 -45px; }
+    .password { 
+        margin-left: -20px; 
+        width: 19.8rem;
+    }
+    #user-type { 
+        margin: 16px 35px 0 -25px; 
+        
+    }
+    .user-type { margin: 16px 15px 0 -20px;} */
+}
+
+@media screen and (max-width: 480px) {
+    .jump {
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+    #email {
+        margin-left: -160px;
+    }
+    .email {
+        margin: 0 50px 0 -10px;
+        width: 15.8rem;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .jump {
+        width: 100%;
+    }
+    #email {
+        margin-left: -230px;
+    }
+    .email {
+        margin: 0 50px 0 -25px;
+    }
+    #password { margin: 0 40px 0 -45px; }
+    .password { 
+        margin-left: -20px; 
+        width: 19.8rem;
+    }
+    #user-type { 
+        margin: 16px 35px 0 -25px; 
+        
+    }
+    .user-type { margin: 16px 15px 0 -20px;}
+}
+
+@media screen and (max-width: 281px) {
+    .jump {
+        width: 10rem;
+    }
+}
+
 </style>

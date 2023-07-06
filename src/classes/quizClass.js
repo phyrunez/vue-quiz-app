@@ -1,6 +1,4 @@
-const API_URL = "https://opentdb.com/api.php";
-
-const SECONDS_PER_QUESTIONS = 10;
+import axios from "axios"
 
 class quizClass {
 	constructor({
@@ -18,29 +16,26 @@ class quizClass {
 		
 	}
 
-	getQuestionsFromApiGenerated(url) {
-		return new Promise((resolve, reject) => {
-			fetch(url)
-				.then((resp) => {
-					const data = resp.json();
-					return data;
-				})
-				.then((data) => {
-					const transformedResp = data?.results.map((item) => {
-						const options = this.shuffleOptions([
-							...item.incorrect_answers,
-							item.correct_answer,
-						]);
-						return { ...item, options, selectedAnswer: "" };
-					});
-					this.questions = transformedResp;
-					return resolve(this.questions);
-				})
-				.catch((err) => {
-					reject({});
-					console.log(err.message);
-				});
-		});
+	async getQuestionsFromApiGenerated(url) {
+
+		try {
+			const response = await axios.get(url)
+
+			const transformedResp = response?.data?.results.map((item) => {
+				const options = this.shuffleOptions([
+					...item.incorrect_answers,
+					item.correct_answer,
+				]);
+				return { ...item, options, selectedAnswer: "" };
+			});
+
+			this.questions = transformedResp;
+			return this.questions;
+
+		}catch(err) {
+			console.log(err.message)
+		}
+
 	}
 
 	shuffleOptions(options) {

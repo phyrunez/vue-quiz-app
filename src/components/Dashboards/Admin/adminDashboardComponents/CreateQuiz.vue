@@ -29,12 +29,12 @@
 
                             <label for="cars">Difficulty</label><br>
                             <select name="" id="difficulty_selector" v-model="difficultySet">
-                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt }}</option>
+                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1)  }}</option>
                             </select><br>
 
                             <label for="cars">Options Type</label><br>
                             <select name="" id="option-type_selector" v-model="optionsTypeSet">
-                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt }}</option>
+                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1) }}</option>
                             </select>
                     </div>
                     <div class="textPart_input">
@@ -61,18 +61,18 @@ export default {
     data() {
         return {
             state: true,
-            CATEGORY_URL: "https://opentdb.com/api_category.php",
-            DIFF_OPT_URL: "https://opentdb.com/api.php?amount=20",
-            API_URL: 'https://opentdb.com/api.php',
+            CATEGORY_URL: process.env.VUE_APP_CATEGORY_URL,
+            DIFF_OPT_URL: process.env.VUE_APP_DIFF_OPT_URL,
+            API_URL: process.env.VUE_APP_API_URL,
             selectedCategoryOption: null,
             selectedDifficultyOption: null,
             selectedOptionType: null,
             selectedQuestionOption: [],
             quizSession: [],
-            questionSet: '1',
+            questionSet: '',
             categorySet: 'General Knowledge',
-            difficultySet: 'medium',
-            optionsTypeSet: 'multiple',
+            difficultySet: 'Medium',
+            optionsTypeSet: 'Multiple',
             isTimed: false,
             id: 1,
             url: "",
@@ -85,7 +85,8 @@ export default {
             this.btnState = "Creating..."
 
             try {
-                const url =  `https://opentdb.com/api.php?amount=${this.questionSet}&category=${this.categorySet}&difficulty=${this.difficultySet}&type=${this.optionsTypeSet}`
+                const url =  `${this.API_URL}?amount=${this.questionSet}&category=${this.categorySet}&difficulty=${this.difficultySet.toLowerCase()}&type=${this.optionsTypeSet.toLowerCase()}`
+                console.log(url)
                 const questions = await this.quiz.getQuestionsFromApiGenerated(url)
                 
                 this.btnState = "Create Quiz"
@@ -168,6 +169,7 @@ export default {
                 selectOptionType = data?.results.map(item => item.type)
                 let newArray = selectOptionType.filter((item, index) => selectOptionType.indexOf(item) === index)
                 let htmlDiffOption = newArray.map((item) => { return item })
+                console.log(htmlDiffOption)
                 this.selectedOptionType = htmlDiffOption
             } catch (err) {
                 console.log(err)
@@ -180,6 +182,11 @@ export default {
         },
        
     },
+
+    created() {
+        // console.log(process.env.VUE_APP_API_URL)
+    },
+
     mounted() {
         this.handleQuizCategory
         this.handleQuizDifficulty
