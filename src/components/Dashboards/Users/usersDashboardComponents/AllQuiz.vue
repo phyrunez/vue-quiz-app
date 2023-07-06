@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="overall">
         <div class="summary_class">
             <div>
                 <h2>Available Quiz Sessions</h2>
@@ -151,6 +151,108 @@ thead { background: black !important; }
     padding: 3px;
     border-radius: 10px;
     text-align: center;
+}
+
+@media screen and (max-width: 1600px) {
+    .summary_class {
+        width: 80rem;
+        margin: -2rem 40rem 0 10rem;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .summary_class {
+        width: 80rem;
+        margin: -2rem 40rem 0 5rem;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .summary_class {
+        width: 80rem;
+        margin: -2rem 40rem 0 5rem;
+    }
+    h2 {
+        text-align: center;
+        margin: 4rem 0;
+        margin-left: -200px;
+    }
+    .table { 
+        width: 65rem;
+        margin: 4rem -0.5rem 0;
+    }
+    .tag_class_untimed {
+        width: 72%;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .overall { 
+        width: 100%;    
+    }
+    .table {
+        width: 50rem;
+        margin: 4rem 1rem 0 2.5rem;
+    }
+    .tag_class_untimed {
+        font-size: 12px;
+        width: 89%
+    }
+    .tag_class_timed {
+        font-size: 12px;
+        width: 89%
+    }
+    h2 {
+        text-align: center;
+        margin: 4rem 0;
+        margin-left: -22rem;
+    }
+}
+
+@media screen and (max-width: 971px) {
+    h2 {
+        text-align: center;
+        margin: 4rem 0;
+        margin-left: -34rem;
+    }
+    .table {
+        width: 50rem;
+        margin: 4rem 1rem 0 -2.5rem;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    h2 {
+        text-align: center;
+        margin: 4rem 0;
+        margin-left: -13.5rem;
+    }
+    .summary_class {
+        width: 100%;
+    }
+    .table {
+        width: 40rem !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    h2 {
+        text-align: center;
+        margin: 4rem 0;
+        margin-left: -13rem;
+    }
+    .table {
+        width: 50rem;
+        margin: 4rem 1rem 0 -4.5rem;
+    }
+}
+
+@media screen and (max-width: 653px) {
+    .table {
+        width: 30rem;
+        margin: 4rem 1rem 0 -4.5rem;
+        margin-right: 20rem
+    }
 }
 
 </style>
