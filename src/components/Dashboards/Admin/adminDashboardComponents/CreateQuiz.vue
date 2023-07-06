@@ -3,12 +3,16 @@
         <the-header></the-header>
         <div class="row">
             <div>
-                <b-icon class="icon_class" v-b-toggle.sidebar-border icon="text-right" aria-hidden="true"></b-icon>
-                <b-sidebar id="sidebar-border" sidebar-class="border-right bg-dark text-white display-block w-80">
-                    <sidebar></sidebar>
-                </b-sidebar>
+                <button type="button" class="btn btn-info navbar-btn p-3 m-3">
+                    <i class="glyphicon glyphicon-align-left"></i>
+                    <span> Admin Create Quiz</span>
+                </button>
             </div>
-            <main class="container" id="welcome">
+            <!-- <div v-if="show" ref="content">
+                <sidebar></sidebar>
+            </div> -->
+
+            <main class="container-full" id="welcome">
                 <div class="imgPart">
                         <h1>Set Session for the Quiz App</h1>
                         <img src="../../../../assets/quiz.jpg" alt="quiz_img">
@@ -17,7 +21,7 @@
                     <h4>Kindly select your questions preference to get started!!!</h4>
                     <div class="question_selector">
                             <label for="cars">Number of questions</label><br>
-                            <select name="" id="num_selector" v-model="questionSet">
+                            <select name="" id="num_selector" v-model="questionSet" @change="questionSet">
                                 <option v-for="opt in selectedQuestionOption" :value="opt">{{ opt }}</option>
                             </select><br>
 
@@ -28,13 +32,13 @@
                             </select><br>
 
                             <label for="cars">Difficulty</label><br>
-                            <select name="" id="difficulty_selector" v-model="difficultySet">
-                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1)  }}</option>
+                            <select name="" id="difficulty_selector" v-model="difficultySet" @change="difficultySet">
+                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt  }}</option>
                             </select><br>
 
                             <label for="cars">Options Type</label><br>
-                            <select name="" id="option-type_selector" v-model="optionsTypeSet">
-                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1) }}</option>
+                            <select name="" id="option-type_selector" v-model="optionsTypeSet" @change="optionsTypeSet">
+                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt }}</option>
                             </select>
                     </div>
                     <div class="textPart_input">
@@ -52,6 +56,7 @@
 import TheHeader from '../../../../UI/TheHeader.vue'
 import Sidebar from "./Sidebar"
 import quizClass from "../../../../classes/quizClass"
+import axios from 'axios'
 
 export default {
     components: {
@@ -61,8 +66,8 @@ export default {
     data() {
         return {
             state: true,
-            CATEGORY_URL: process.env.VUE_APP_CATEGORY_URL,
-            DIFF_OPT_URL: process.env.VUE_APP_DIFF_OPT_URL,
+            CATEGORY_URL: "",
+            DIFF_OPT_URL: "",
             API_URL: process.env.VUE_APP_API_URL,
             selectedCategoryOption: null,
             selectedDifficultyOption: null,
@@ -77,6 +82,8 @@ export default {
             id: 1,
             url: "",
             btnState: "Create Quiz",
+            show: ref(false),
+            content: ref()
         }
     },
     methods: {
@@ -119,7 +126,16 @@ export default {
                 this.btnState = "Create Quiz"
                 console.log(err.message)
             }
-        }
+
+            this.$router.push('dashboard/admin')
+        }, 
+        handleClick() {
+            this.show = !this.show
+            nextTick(() => {
+                console.log(show.value, content.value)
+            })
+        },
+
     },
     computed: {
         
@@ -132,6 +148,8 @@ export default {
                 counter++;
                 this.selectedQuestionOption.push(selectOption);
             }
+
+            console.log(this.selectedQuestionOption)
         },
 
         handleQuizCategory: async function() {
@@ -140,7 +158,9 @@ export default {
                 const data = await res.json()
                 let selectCategoryOption = data?.trivia_categories.map(item => { return item })
                 this.selectedCategoryOption = selectCategoryOption
+                console.log(this.selectedCategoryOption)
                 this.categorySet = this.selectedCategoryOption.find(item => item.id === this.categorySet)?.name
+                console.log(this.categorySet)
             } catch (err) {
                 console.log(err)
             }
@@ -174,6 +194,8 @@ export default {
             } catch (err) {
                 console.log(err)
             }
+
+            console.log(this.selectedOptionType)
         },
     },
     watch: {
@@ -185,13 +207,19 @@ export default {
 
     created() {
         // console.log(process.env.VUE_APP_API_URL)
+        this.CATEGORY_URL = process.env.VUE_APP_CATEGORY_URL,
+        this.DIFF_OPT_URL = process.env.VUE_APP_DIFF_OPT_URL
     },
 
     mounted() {
+        // this.CATEGORY_URL = process.env.VUE_APP_CATEGORY_URL,
+        // this.DIFF_OPT_URL = process.env.VUE_APP_DIFF_OPT_URL
+
         this.handleQuizCategory
         this.handleQuizDifficulty
         this.handleQuizOptionType
         this.handleQuizQuestion
+
     },
     updated() {
         this.quiz = new quizClass({
@@ -201,6 +229,8 @@ export default {
             optionsTypeSet: this.optionsTypeSet,
             isTimed: this.isTimed
         })
+
+        console.log(this.quiz)
     }
 }
 </script>
@@ -224,14 +254,15 @@ export default {
     margin-top: 50rem !important;
     background: black !important;
 }
-#welcome {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    width: 55rem;
-    margin: 10px 33rem 0;
-    height: 37.5rem;
-    display: flex;
-}
 
+.container-full {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    margin: 8rem 0;
+    height: 60.5rem;
+    justify-content: center;
+}
 .imgPart {
     background-color: #fbdb89;
     border-radius: 10px 0 0 10px;
@@ -243,14 +274,14 @@ export default {
 .imgPart h1 {
     width: 300px;
     text-align: center;
-    font-size: 50px;
+    font-size: 40px;
     letter-spacing: 2px;
     margin: 0 auto;
     margin-top: 30px;
 }
 
 .imgPart img {
-    margin-top: 90px;
+    margin-top: 128px;
     width: 100%;
     height: 50%;
     border-radius: 0 0 0 10px;
@@ -259,7 +290,7 @@ export default {
 .textPart { 
     text-align: center; 
     border-radius: 0 10px 10px 0;
-    width: 32rem;
+    width: 48rem;
     background-color: #f38e82;
     margin-right: -20px;
 }
@@ -276,7 +307,7 @@ export default {
     margin-top: 20px;
 }
 .question_selector select {
-    width: 21rem;
+    width: 31rem;
     margin-bottom: 20px;
     padding: 15px;
     outline: none;
@@ -287,8 +318,11 @@ export default {
 }
 .question_selector label {
     float: left;
-    margin: 0 0 0 53px
+    margin: 0 0 0 100px;
+    font-size: 16.5px;
 }
+
+.selector-label { font-size: 15px; }
 .btn_submit {
     margin-top: 20px;
     padding: 12px;
@@ -299,5 +333,21 @@ export default {
     background: green;
     border-radius: 10px 10px 0 0;
     cursor: pointer;
+}
+
+@media screen and (max-width: 836px) {
+    .imgPart {
+        display: none;
+    }
+    .container-full {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 466px) {
+    .question_selector label {
+        float: left;
+        margin: 0 0 0 100px;
+    }
 }
 </style>

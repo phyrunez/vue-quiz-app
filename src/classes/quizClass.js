@@ -28,9 +28,10 @@ class quizClass {
 				]);
 				return { ...item, options, selectedAnswer: "" };
 			});
-
-			this.questions = transformedResp;
-			return this.questions;
+			
+			const questions = transformedResp;
+			console.log(questions)
+			return questions;
 
 		}catch(err) {
 			console.log(err.message)

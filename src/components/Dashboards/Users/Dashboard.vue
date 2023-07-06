@@ -3,10 +3,11 @@
         <the-header></the-header>
         <div class="row">
             <div>
-                <b-icon class="icon_class" v-b-toggle.sidebar-border icon="text-right" aria-hidden="true"></b-icon>
-                <b-sidebar id="sidebar-border" sidebar-class="border-right bg-dark text-white display-block w-80">
-                    <sidebar></sidebar>
-                </b-sidebar>
+                <button type="button" class="btn btn-info navbar-btn p-3 m-3">
+                    <i class="glyphicon glyphicon-align-left"></i>
+                    <span>Users Dashboard</span>
+                </button>
+                
             </div>
             <all-quiz></all-quiz>
             <router-view></router-view>
@@ -17,13 +18,11 @@
 
 <script>
 import TheHeader from '../../../UI/TheHeader'
-import Sidebar from "./usersDashboardComponents/Sidebar.vue"
 import AllQuiz from "./usersDashboardComponents/AllQuiz"
 
 export default {
     components: {
         'the-header': TheHeader,
-        'sidebar': Sidebar,
         'all-quiz': AllQuiz,
     },
     data() {
@@ -31,7 +30,6 @@ export default {
             state: true
         }
     },
-    
 }
 </script>
 
@@ -48,5 +46,8 @@ export default {
     .sidebar-class {
         margin-top: 30rem !important;
         background: black !important;
+    }
+    button {
+        cursor: default;
     }
 </style>

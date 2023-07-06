@@ -1,9 +1,10 @@
 <template>
-    <div class="sidebar_div">
+    <div class="sidebar_div container">
         <div class="image_div">
             <img src="../../../../assets/admin.svg" />
             <p>Admin</p>
         </div>
+        <hr>
         <div class="sidebar_list">
             <ul>
                 <li class="active"><router-link :to="dcq">Create Quiz</router-link></li>
@@ -23,11 +24,17 @@ export default {
 </script>
 
 <style scoped>
+.sidebar_div {
+    background: grey
+}
 .image_div {
-    background: white;
-    color: black;
+    /* background: black; */
+    color: white;
+    width: 100%;
     text-align: center;
+    font-size: 15px;
     padding: 20px 0;
+    border: 3px solid grey;
 }
 img {
     width: 80px !important;
@@ -39,20 +46,30 @@ p {
 .sidebar_list {
     margin-top: 30px;
     padding: 10px 0;
+    width: 100%;
 }
 .sidebar_list ul li {
     padding: 20px 0;
+    font-size: 18px;
+    text-align: center;
     cursor: pointer;
     list-style: none;
     margin-left: -25px
 }
 .sidebar_list ul li:hover {
-    background: #ff6666;
+    background: black;
     color: white;
      width: 100%;
 }
 .sidebar_list ul li a {
     text-decoration: none;
     color: white;
+}
+
+@media screen and (max-width: 577px) {
+    .sidebar_div {
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 </style>

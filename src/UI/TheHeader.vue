@@ -5,13 +5,12 @@
             <h3>VueQuiz</h3>
         </div>
         <div class="dropdown">
-            <h3>
-                Welcome <b-dropdown variant="warning">
-                    <div class="dropdown_div">
-                        <b-dropdown-item><router-link to="/login">Logout</router-link></b-dropdown-item>
-                    </div>
-                </b-dropdown>
-            </h3>
+            <button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Welcome
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><router-link to="/login">Logout</router-link></li>
+            </ul>
         </div>
     </div>
 </template>
@@ -27,6 +26,9 @@ export default {
 </script>
 
 <style scoped>
+.dropdown button {
+    font-size: 15px;
+}
 .nav_head {
     background: #0c7988;
     display: flex;
@@ -54,5 +56,10 @@ a {
     text-decoration: none;
     color: black;
     margin-right: 30px;
+}
+@media screen and (max-width: 281px) {
+    .nav_head {
+        width: 100%;
+    }
 }
 </style>

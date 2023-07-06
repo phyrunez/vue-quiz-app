@@ -3,13 +3,14 @@
         <the-header></the-header>
         <div class="row">
             <div>
-                <b-icon class="icon_class" v-b-toggle.sidebar-border icon="text-right" aria-hidden="true"></b-icon>
-                <b-sidebar id="sidebar-border" sidebar-class="border-right bg-dark text-white display-block w-80">
-                    <sidebar></sidebar>
-                </b-sidebar>
+                <button type="button" class="btn btn-info navbar-btn p-3 m-3">
+                    <i class="glyphicon glyphicon-align-left"></i>
+                    <span>Users Dashboard</span>
+                </button>
+            
             </div>
 
-            <div class="summary_class" :id="quizSection">
+            <div class="container-full">
                 <div class="quiz_section_header">
                     <div class="section_question">
                         Question: <span class="question_number" :id="questionNumber">{{ curQuestionIndex }}</span>
@@ -71,13 +72,10 @@
 import ResultModal from "../../../../slots/ResultModal.vue"
 import quizClass from "../../../../classes/quizClass"
 import TheHeader from "../../../../UI/TheHeader.vue"
-import Sidebar from "./Sidebar.vue"
-import duration from 'human-duration'
 
 export default {
     components: {
         "the-header": TheHeader,
-        "sidebar": Sidebar,
         "result-modal": ResultModal
     },
     data() {
@@ -208,6 +206,7 @@ export default {
     async mounted() {
         
         const sessions = JSON.parse(localStorage.getItem('Quiz Session'))
+        console.log(sessions)
         const id = +this.$route.params.id
 
         const session = sessions.find(session => session.id === id)
@@ -254,6 +253,13 @@ export default {
     margin: 0 30rem;
     width: 30rem 
 }
+
+.container-full {
+    width: 90rem;
+    margin: 60px auto 0;
+    /* height: 40rem; */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
 .all {
     margin: 0;
     padding: 0;
@@ -270,12 +276,12 @@ export default {
     background: black !important;
 }
 
-.summary_class {
+/* .summary_class {
     width: 70rem;
     margin: -1rem 25rem 0;
     height: 40rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
+} */
 
 #quiz_section{
     margin: 10vw auto;
@@ -289,7 +295,7 @@ export default {
 .quiz_section_header {
    display: flex;
    justify-content: space-between !important;
-   width: 68rem;
+   width: 100%;
    padding-bottom: 15px;
 }
 
@@ -299,7 +305,7 @@ export default {
     border-radius: 45px;
     padding: 20px;
     font-size: 20px;
-    width: 11rem;
+    width: 17rem;
 }
 
 .question_number {
@@ -313,7 +319,7 @@ export default {
     background: #f38e82;
     font-size: 20px;
     margin: 25px 30px 0 0;
-    width: 7rem;
+    width: 13rem;
     border-radius: 45px;
     padding: 20px;
     letter-spacing: 5px;
@@ -321,10 +327,10 @@ export default {
 
 .question_background {
     background: #A67B5B;
-    height: 27rem;
-    width: 70rem;
-    margin-top: 16px;
-    margin-left: -12px;
+    height: 43rem;
+    width: 90rem;
+    margin-top: 10px;
+    margin-left: -8px;
     padding-top: 10px;
 }
 
@@ -362,8 +368,8 @@ export default {
     display: flex;
     justify-content: space-between;
     /* width: 45rem; */
-    width: 63rem;
-    margin: 20px 0 0 40px;
+    width: 90%;
+    margin: 10px 0 0 40px;
 }
 
 .prev_btn button, .next_btn button {
@@ -380,8 +386,8 @@ export default {
 #quizSummary {
     text-align: center;
     background-color: #fbdb89;
-    width: 40rem;
-    margin: 15rem 35rem 10px;
+    width: 100%;
+    margin: 15rem auto 10px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);   
 }
@@ -465,7 +471,123 @@ button[disabled] {
     cursor: not-allowed;
 }
 
-input[type="radio"]:checked {
-    color: red
+@media screen and (max-width: 1216px) {
+    .container-full, .question_background {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .container-full {
+        width: 100%;
+        margin: 5rem auto 0;
+    }
+    .question_background {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 913px) {
+    .container-full, .question_background {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 821px) {
+    .container-full, .question_background {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 776px) {
+    .question_background {
+        height: 50rem
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .container-full, .question_background {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 583px) {
+    .container-full {
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+    .question_background { width: 100% !important; }
+
+    #submit {
+        width: 10rem;
+    }
+}
+
+@media screen and (max-width: 541px) {
+    .container-full {
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+    .question_background {
+        width: 100% !important;
+    }
+    .section_question {
+        background: #f38e82;
+        margin: 25px 0 0 30px;
+        border-radius: 45px;
+        padding: 20px;
+        font-size: 13px;
+        width: 13rem;
+    }
+
+    .question_number {
+        background: white;
+        border-radius: 50%;
+        padding: 5px 10px;
+        height: 10px;
+    }
+
+    .section_timer {
+        background: #f38e82;
+        font-size: 20px;
+        margin: 25px 30px 0 0;
+        width: 13rem;
+        border-radius: 45px;
+        padding: 20px;
+        letter-spacing: 5px;
+    }
+}
+
+@media screen and (max-width: 516px) {
+    .container-full{
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+    .question_background {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container-full {
+        width: 100% !important;
+        margin: 9rem auto 0;
+    }
+    .question_background {
+        width: 100% !important;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .container-full, .question_background {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 281px) {
+    .container-full, .question_background {
+        width: 10rem;
+    }
 }
 </style>

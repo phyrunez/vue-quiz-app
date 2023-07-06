@@ -3,32 +3,28 @@
         <jumbotron-slot>
             <h3>Sign up for an Account</h3>
             <form @submit.prevent="signup">
-                <label id="email" for="email">Email</label>
-                <input 
-                    class="email"
-                    type="email" 
-                    placeholder="Enter Email"
-                    v-model="email"
-                    required
-                />
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control fs-4" type="email" placeholder="Enter Email" v-model="email" required />
+                </div>
 
-                <label id="password" for="password">Password</label>
-                <input 
-                    class="password"
-                    type="password" 
-                    placeholder="Enter Password"
-                    v-model="password"
-                    required
-                />
+                <div class="form-group pt-5">
+                    <label for="pwd">Password</label>
+                    <input type="password" class="form-control fs-4" id="pwd" v-model="password" placeholder="Enter password" required />
+                </div>
 
-                <label id="user-type" for="user-type">User Type</label>
-                <select name="User" v-model="userType" class="user-type">
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
+                <div class="form-group pt-5">
+                    <label for="user-type">User Type</label>
+                    <select name="User" class="form-control fs-4" v-model="userType">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
 
-                <button class="signup_btn"><span>Sign up</span></button>
-                <p>Already have an Account? <router-link class="link_active" to='/login'>Login</router-link></p>
+                <div class="btn_wrapper">
+                    <button class="signup_btn"><span>Signup</span></button>
+                    <p>Already have an account? <router-link class="link_active" to='/login'>Login</router-link></p>
+                </div>
             </form>
         </jumbotron-slot>
     </transition>

@@ -19,45 +19,21 @@
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
+    font-size: 30px;
 }
 
 form {
-    margin: 10px auto 20px;
+    margin: 50px auto 20px;
     width: 35rem;
+    font-size: 16px;
+}
+
+.btn_wrapper {
     text-align: center;
-}
-#email {
-    padding: 70px 70px 40px 60px;
-    font-size: 15px;
-    font-weight: bold;
-}
-.email {
-    height: 38px;
-    /* margin: 10px 0; */
-    width: 19.8rem;
-    outline: none;
-    border: none;
-    margin-left: 5px;
-    padding-left: 10px;
-}
-#password, #user-type {
-    padding: 0px 30px 30px 55px;
-    font-size: 15px;
-    font-weight: bold;
-}
-.password, .user-type {
-    height: 38px;
-    margin: 10px 0;
-    border: none;
-    outline: none;
-    width: 20rem;
-    margin-left: 20px;
-    appearance: none;
-    padding-left: 10px;
 }
 .signup_btn, .login_btn {
     width: 100px;
-    margin: 20px 0;
+    margin: 20px auto;
     padding: 10px;
     font-size: 15px;
     color: white;
@@ -140,22 +116,6 @@ form {
         width: 100% !important;
         margin: 9rem auto 0;
     }
-    #email {
-        margin-left: -80px;
-    }
-    .email {
-        margin: 0 50px 0 10px;
-    }
-    #password { margin: 0 40px 0 -45px; }
-    .password { 
-        margin-left: -20px; 
-        width: 19.8rem;
-    }
-    #user-type { 
-        margin: 16px 35px 0 -25px; 
-        
-    }
-    .user-type { margin: 16px 15px 0 -20px;}
 }
 
 @media screen and (max-width: 541px) {
@@ -170,23 +130,6 @@ form {
         width: 100% !important;
         margin: 9rem auto 0;
     }
-    #email {
-        margin-left: -120px;
-    }
-    .email {
-        margin: 0 50px 0 -10px;
-        width: 15.8rem;
-    }
-    /* #password { margin: 0 40px 0 -45px; }
-    .password { 
-        margin-left: -20px; 
-        width: 19.8rem;
-    }
-    #user-type { 
-        margin: 16px 35px 0 -25px; 
-        
-    }
-    .user-type { margin: 16px 15px 0 -20px;} */
 }
 
 @media screen and (max-width: 480px) {
@@ -194,35 +137,12 @@ form {
         width: 100% !important;
         margin: 9rem auto 0;
     }
-    #email {
-        margin-left: -160px;
-    }
-    .email {
-        margin: 0 50px 0 -10px;
-        width: 15.8rem;
-    }
 }
 
 @media screen and (max-width: 426px) {
     .jump {
         width: 100%;
     }
-    #email {
-        margin-left: -230px;
-    }
-    .email {
-        margin: 0 50px 0 -25px;
-    }
-    #password { margin: 0 40px 0 -45px; }
-    .password { 
-        margin-left: -20px; 
-        width: 19.8rem;
-    }
-    #user-type { 
-        margin: 16px 35px 0 -25px; 
-        
-    }
-    .user-type { margin: 16px 15px 0 -20px;}
 }
 
 @media screen and (max-width: 281px) {
