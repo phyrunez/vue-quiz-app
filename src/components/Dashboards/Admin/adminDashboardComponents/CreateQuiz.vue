@@ -127,7 +127,7 @@ export default {
         }, 
 
         handleClick() {
-            this.$router.push("dashboard/admin")
+            this.$router.push("/dashboard/admin")
         }
 
     },
