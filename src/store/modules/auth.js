@@ -1,13 +1,12 @@
 import axios from "axios"
 
-// const login = process.env.VUE_APP_FIREBASE_SIGN_IN_WITH_PASSWORD 
-// const signup = process.env.VUE_APP_FIREBASE_SIGNUP
-
 const state = {
     userId: null,
     token: null,
     tokenExpiration: null,
-    success_msg: "Successfully logged in to the system"
+    displayName: null,
+    success_msg: "Successfully logged in to the system",
+    User: []
 }
 
 const mutations = {
@@ -15,6 +14,9 @@ const mutations = {
         state.token = payload.idToken;
         state.userId = payload.userId;
         state.tokenExpiration = payload.tokenExpiration
+        state.displayName = payload.displayName
+
+        state.User.push(payload)
     }
 }
 
@@ -30,22 +32,18 @@ const actions = {
             returnSecureToken: true
         })
         .then(resp => {
-                const data = resp
-                
-                return data
-        })
-        .then(data => {
             context.commit('setUser', {
-                token: data.idToken,
-                userId: data.localId,
-                tokenExpiration: data.expiresIn,
+                token: resp.idToken,
+                userId: resp.localId,
+                tokenExpiration: resp.expiresIn,
+                displayName: resp.displayName
             })
             
             alert(state.success_msg)
             
         })
         .catch(error => {
-            alert('Something went wrong - Please make sure to login with the correct')
+            console.log('Something went wrong - Please make sure to login with the correct')
 
         })
 
@@ -62,15 +60,19 @@ const actions = {
             
         })
         .then(resp => {
-            if(resp.status === 400) {
-                const error = "Something went wrong, Please Check that you are not using a registered details";
-                alert(error)
-                throw new Error(error);
-            }else {
-                const data = resp
-                return data
-            }
+            // if(resp.status === 400) {
+            //     const error = "Something went wrong, Please Check that you are not using a registered details";
+            //     alert(error)
+            //     throw new Error(error);
+            // }else {
+            //     const data = resp
+               
+            //     return data
+            // }
             
+            const data = resp
+            console.log(data.data)
+            return data      
         })
         .then(data => {
             context.commit('setUser', {
@@ -80,11 +82,13 @@ const actions = {
             })
 
             alert(state.success_msg)
-            
+            this.router.push("/dashboard/admin")
         })
         .catch(error => {
-            alert('Something went wrong - Please make sure to login with the correct')
-        
+            // alert('Something went wrong - Please make sure to login with the correct')
+            if(error.response) {
+                console.log(error.resp.data)
+            }
         })
     }
 }
@@ -95,10 +99,14 @@ const getters = {
     },
     token(state) {
         return state.token;
+    },
+    User(state) {
+        return state.User;
     }
 }
 
 export default {
+    namespaced: true,
     state, 
     mutations,
     actions,

@@ -29,51 +29,95 @@
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
     data() {
         return {
             email: "",
             password: "",
             userType: "",
-            success_msg: "Successfully logged in to the system"
+            success_msg: "Successfully logged in to the system",
+            usersArr: null,
+            userData: null,
+            adminData: null,
+            adminArr: null
         }
     },
     computed: {
         UsersArr() {
             return this.$store.getters["users/allUsers"]
         }, 
-
+        
     },
     created() {
-       
+        axios.get(process.env.VUE_APP_USERS_ENDPOINT)
+        .then(resp => {
+            let Data = resp.data
+            this.usersArr = Object.values(Data) 
+        })
+
+        axios.get(process.env.VUE_APP_ADMIN_ENDPOINT)
+        .then(resp => {
+            let Data = resp.data
+            this.adminArr = Object.values(Data)
+        })
     }, 
 
     methods: {
         login() {
-            try {
-                this.$store.dispatch('login', {
-                    email: this.email,
-                    password: this.password,
-                    displayName: this.userType
-                })
+           
+            this.userData = this.usersArr.find(item => {
+                return item.email === this.email
+            });
 
-                
-                if(this.userType === 'user') {
+            this.adminData = this.adminArr.find(item => {
+                return item.email === this.email
+            });
+
+            if(this.userData && this.userType === 'user'){
+                try {
+                    this.$store.dispatch('auth/login', {
+                        email: this.email,
+                        password: this.password,
+                        displayName: this.userType
+                    })
+
+
                     this.$store.getters["users/allUsers"];
-                   
                     this.$router.replace({ name: "users" });
+                } catch {err =>
+                    console.log(err.message)               
+                }
+                return
+            }else if (this.adminData && this.userType === 'admin') {
+                try {
+                    this.$store.dispatch('auth/login', {
+                        email: this.email,
+                        password: this.password,
+                        displayName: this.userType
+                    })
+
+
+                    this.$store.getters["admin/AllAdmin"];
+                    this.$router.replace({ name: "admin" });
+
+                } catch {
+                    err =>
+                    console.log(err.message)
                 }
 
-                if(this.userType === 'admin') {
-                    // this.$store.getters("admin/allAdmin")
-                    
-                    this.$router.push("dashboard/admin");
-                }
-            }catch {err => 
-                console.log(err)
-                alert(err.message)
+                return
+            }else {
+                alert("Email doesn't Exist, Please Signup with the system!!")
+                return
             }
+            
         }
     },
+
+    // updated() {
+    //     console.log(this.$store.dispatch('auth/signup'))
+    // },
 }
 </script>

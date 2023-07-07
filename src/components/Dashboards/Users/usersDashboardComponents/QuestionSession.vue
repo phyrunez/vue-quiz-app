@@ -58,7 +58,7 @@
                             </tbody>
                         </table>
                         <div class="summaryBtns">
-                                <button class="btnWelcome  mt-2" id="welcome_page"><router-link to="/login">Quiz Ended</router-link></button>
+                                <button class="btnWelcome  mt-2" id="welcome_page"><router-link to="/dashboard/users">Go back</router-link></button>
                         </div>
                     </main>
                 </result-modal>
@@ -199,8 +199,14 @@ export default {
             this.setTimer()
         }
     },
-    created() {
-
+    beforeRouteLeave(to, from, next) {
+        const alert_msg = window.confirm('Do you really want to leave? Your Session will be cancelled!')
+        console.log(to, from)
+        if (alert_msg) {
+            next()
+        } else {
+            next(false)
+        }
     },
     
     async mounted() {
@@ -233,6 +239,7 @@ export default {
         this.interval = setInterval(() => { 
             this.triggerTimer()
         }, 1000)
+
     },
     
     beforeDestroy() {

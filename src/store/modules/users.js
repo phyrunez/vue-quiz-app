@@ -13,6 +13,12 @@ const mutations = {
         state.userAuthState = status;
     },
 
+    allUsers(state, data) {
+        state.allUsers.push(data)
+    }
+}
+
+const actions = {
     async newUsers(_, payload) {
 
         try {
@@ -22,6 +28,7 @@ const mutations = {
                 userType: payload.userType
             })
 
+
 		}catch(err) {
             const showError = err.message + " - Please check the url and try again"
             console.log(showError)
@@ -29,29 +36,20 @@ const mutations = {
 
     },
 
-    async allUsers(state) {
+    async allUsers(context) {
 
         try {
 			await axios.get(url)
             .then(resp => {
                 const data = resp
-                state.allUsers.push(data)
+                console.log(data)
+                context.commit('allUsers', data)
             })
 
 		}catch(err) {
             const showError = err.message + " - Please check the url and try again"
             alert(showError)
         }
-    }
-}
-
-const actions = {
-   newUsers(context, payload) {
-        context.commit("newUsers", payload)
-    },
-
-    allUsers(context, data) {
-        context.commit('allUsers', data)
     }
 }
 

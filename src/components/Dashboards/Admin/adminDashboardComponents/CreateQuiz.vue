@@ -17,23 +17,23 @@
                 <div class="textPart">
                     <h4>Kindly select your questions preference to get started!!!</h4>
                     <div class="question_selector">
-                            <label for="cars">Number of questions</label><br>
+                            <label for="num_selector">Number of questions</label><br>
                             <select name="" id="num_selector" v-model="questionSet">
                                 <option v-for="opt in selectedQuestionOption" :value="opt">{{ opt }}</option>
                             </select><br>
 
-                            <label for="cars">Category</label><br>
+                            <label for="category_selector">Category</label><br>
                             <select name="" id="category_selector" v-model="categorySet">
                                 <option v-for="opt in selectedCategoryOption" :value="opt.id">{{ opt.name }}</option>
                                
                             </select><br>
 
-                            <label for="cars">Difficulty</label><br>
+                            <label for="difficulty_selector">Difficulty</label><br>
                             <select name="" id="difficulty_selector" v-model="difficultySet">
                                 <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1)  }}</option>
                             </select><br>
 
-                            <label for="cars">Options Type</label><br>
+                            <label for="option-type_selector">Options Type</label><br>
                             <select name="" id="option-type_selector" v-model="optionsTypeSet">
                                 <option v-for="opt in selectedOptionType" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1) }}</option>
                             </select>
@@ -52,7 +52,7 @@
 <script>
 import TheHeader from '../../../../UI/TheHeader.vue'
 import Sidebar from "./Sidebar"
-import { ref, nextTick } from "vue"
+
 import quizClass from "../../../../classes/quizClass"
 
 export default {
@@ -79,8 +79,8 @@ export default {
             isTimed: false,
             id: 1,
             url: "",
-            btnState: "Create Quiz",
-           
+            btnState: "Create Quiz",  
+            created: ""
         }
     },
     methods: {
@@ -95,7 +95,11 @@ export default {
                 
                 this.btnState = "Create Quiz"
 
-                if (!questions.length) return alert('The Question combination you set is unavailable, please select another one') 
+                if (!questions.length) {
+                    alert('The Question combination you set is unavailable, please select another one')
+                }else {
+                    alert("Quiz Session created Successfully, toggle view all task seesion with button above")
+                }
                 console.log(this.selectedCategoryOption)
 
                 let sessions = localStorage.getItem('Quiz Session')
@@ -104,6 +108,7 @@ export default {
                 if (!Array.isArray(sessions)) sessions = []
 
                 this.url = url
+                this.created = new Date().toUTCString()
 
                 let GeneratedAPI = {
                     id: sessions.length + 1,
@@ -113,12 +118,12 @@ export default {
                     difficulty: this.difficultySet,
                     options_type: this.optionsTypeSet,
                     isTimed: this.isTimed,
-                    url: this.url
+                    url: this.url,
+                    created: this.created
                 }
                 
                 sessions.push(GeneratedAPI)
                 localStorage.setItem('Quiz Session', JSON.stringify(sessions))
-                window.alert("Session created successfully")
             }catch(err) {
                 this.btnState = "Create Quiz"
                 console.log(err.message)

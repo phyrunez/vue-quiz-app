@@ -13,6 +13,7 @@
                             <th scope="col">Number of Questions</th>
                             <th scope="col">Options Type</th>
                             <th scope="col">Question Category</th>
+                            <th scope="col">Date Created</th>
                             <th scope="col">Session</th>
                             <th scope="col">Start Quiz</th>
                         </tr>
@@ -24,6 +25,7 @@
                             <td>{{ sess.num_of_questions }}</td>
                             <td>{{ sess.options_type }}</td>
                             <td>{{ sess.category_name }}</td>
+                            <td>{{ sess.created }}</td>
                             <td v-if="sess.isTimed === true">
                                 <div :class="{ 'tag_class_timed': timed }">Timed</div>
                             </td>
@@ -135,14 +137,14 @@ h2 {
 thead { background: black !important; }
 .tag_class_timed {
     background: #ff7f60;
-    width: 66%;
+    width: 78%;
     padding: 3px;
     border-radius: 10px;
     text-align: center;
 }
 .tag_class_untimed {
     background: #a1c621;
-    width: 66%;
+    width: 78%;
     padding: 3px;
     border-radius: 10px;
     text-align: center;
