@@ -107,7 +107,7 @@ export default {
 
                 return
             } else {
-                alert("Email doesn't Exist, Please Signup with the system!!")
+                alert("Email already Exist, Please Signup with the system!!")
                 return
             }
                 
