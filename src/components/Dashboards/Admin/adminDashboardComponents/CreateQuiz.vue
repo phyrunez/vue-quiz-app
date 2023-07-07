@@ -3,15 +3,12 @@
         <the-header></the-header>
         <div class="row">
             <div>
-                <button type="button" class="btn btn-info navbar-btn p-3 m-3">
+                <button type="button" id="toggle" @click="handleClick" class="btn btn-info navbar-btn p-3 m-3">
                     <i class="glyphicon glyphicon-align-left"></i>
-                    <span> Admin Create Quiz</span>
+                    <span> View All Quiz Session</span>
                 </button>
             </div>
-            <!-- <div v-if="show" ref="content">
-                <sidebar></sidebar>
-            </div> -->
-
+           
             <main class="container-full" id="welcome">
                 <div class="imgPart">
                         <h1>Set Session for the Quiz App</h1>
@@ -21,24 +18,24 @@
                     <h4>Kindly select your questions preference to get started!!!</h4>
                     <div class="question_selector">
                             <label for="cars">Number of questions</label><br>
-                            <select name="" id="num_selector" v-model="questionSet" @change="questionSet">
+                            <select name="" id="num_selector" v-model="questionSet">
                                 <option v-for="opt in selectedQuestionOption" :value="opt">{{ opt }}</option>
                             </select><br>
 
                             <label for="cars">Category</label><br>
-                            <select name="" id="category_selector" v-model="categorySet" @change="categorySet">
+                            <select name="" id="category_selector" v-model="categorySet">
                                 <option v-for="opt in selectedCategoryOption" :value="opt.id">{{ opt.name }}</option>
                                
                             </select><br>
 
                             <label for="cars">Difficulty</label><br>
-                            <select name="" id="difficulty_selector" v-model="difficultySet" @change="difficultySet">
-                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt  }}</option>
+                            <select name="" id="difficulty_selector" v-model="difficultySet">
+                                <option v-for="opt in selectedDifficultyOption" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1)  }}</option>
                             </select><br>
 
                             <label for="cars">Options Type</label><br>
-                            <select name="" id="option-type_selector" v-model="optionsTypeSet" @change="optionsTypeSet">
-                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt }}</option>
+                            <select name="" id="option-type_selector" v-model="optionsTypeSet">
+                                <option v-for="opt in selectedOptionType" :value="opt">{{ opt.charAt(0).toUpperCase() + opt.slice(1) }}</option>
                             </select>
                     </div>
                     <div class="textPart_input">
@@ -55,14 +52,15 @@
 <script>
 import TheHeader from '../../../../UI/TheHeader.vue'
 import Sidebar from "./Sidebar"
+import { ref, nextTick } from "vue"
 import quizClass from "../../../../classes/quizClass"
-import axios from 'axios'
 
 export default {
     components: {
         'the-header': TheHeader,
         'sidebar': Sidebar,
     },
+    props: ["name"],
     data() {
         return {
             state: true,
@@ -74,16 +72,15 @@ export default {
             selectedOptionType: null,
             selectedQuestionOption: [],
             quizSession: [],
-            questionSet: '',
-            categorySet: 'General Knowledge',
-            difficultySet: 'Medium',
-            optionsTypeSet: 'Multiple',
+            questionSet: "",
+            categorySet: "",
+            difficultySet: "",
+            optionsTypeSet: "",
             isTimed: false,
             id: 1,
             url: "",
             btnState: "Create Quiz",
-            show: ref(false),
-            content: ref()
+           
         }
     },
     methods: {
@@ -127,18 +124,15 @@ export default {
                 console.log(err.message)
             }
 
-            this.$router.push('dashboard/admin')
         }, 
+
         handleClick() {
-            this.show = !this.show
-            nextTick(() => {
-                console.log(show.value, content.value)
-            })
-        },
+            window.location.assign("../admin")
+        }
 
     },
     computed: {
-        
+
         handleQuizQuestion() {
             let selectOption = "";
             const length = 20;
@@ -148,7 +142,7 @@ export default {
                 counter++;
                 this.selectedQuestionOption.push(selectOption);
             }
-
+            
             console.log(this.selectedQuestionOption)
         },
 
@@ -159,7 +153,7 @@ export default {
                 let selectCategoryOption = data?.trivia_categories.map(item => { return item })
                 this.selectedCategoryOption = selectCategoryOption
                 console.log(this.selectedCategoryOption)
-                this.categorySet = this.selectedCategoryOption.find(item => item.id === this.categorySet)?.name
+                this.categorySet = this.selectedCategoryOption.find(item => item.id === item)?.name
                 console.log(this.categorySet)
             } catch (err) {
                 console.log(err)
@@ -189,13 +183,12 @@ export default {
                 selectOptionType = data?.results.map(item => item.type)
                 let newArray = selectOptionType.filter((item, index) => selectOptionType.indexOf(item) === index)
                 let htmlDiffOption = newArray.map((item) => { return item })
-                console.log(htmlDiffOption)
+                
                 this.selectedOptionType = htmlDiffOption
+               
             } catch (err) {
                 console.log(err)
             }
-
-            console.log(this.selectedOptionType)
         },
     },
     watch: {
@@ -206,20 +199,17 @@ export default {
     },
 
     created() {
-        // console.log(process.env.VUE_APP_API_URL)
         this.CATEGORY_URL = process.env.VUE_APP_CATEGORY_URL,
         this.DIFF_OPT_URL = process.env.VUE_APP_DIFF_OPT_URL
-    },
-
-    mounted() {
-        // this.CATEGORY_URL = process.env.VUE_APP_CATEGORY_URL,
-        // this.DIFF_OPT_URL = process.env.VUE_APP_DIFF_OPT_URL
 
         this.handleQuizCategory
         this.handleQuizDifficulty
         this.handleQuizOptionType
         this.handleQuizQuestion
+    },
 
+    mounted() {
+        
     },
     updated() {
         this.quiz = new quizClass({
@@ -236,6 +226,7 @@ export default {
 </script>
 
 <style scoped>
+
 .all {
     margin: 0;
     padding: 0;

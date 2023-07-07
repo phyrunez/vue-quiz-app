@@ -7,8 +7,8 @@
         <hr>
         <div class="sidebar_list">
             <ul>
-                <li class="active"><router-link :to="dcq">Create Quiz</router-link></li>
-                <li><router-link to="/dashboard/admin">All Quiz</router-link></li>
+                <li class="active"><router-link :to="create">Create Quiz</router-link></li>
+                <li><router-link to="admin">All Quiz</router-link></li>
             </ul>
         </div>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    props: ["dcq"],
+    props: ["create"],
     data() {
         return{}
     }

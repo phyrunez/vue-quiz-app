@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div v-if="show" ref="content">
-                <sidebar :dcq="displayCreateQuiz"></sidebar>
+                <sidebar :create="displayCreateQuiz"></sidebar>
             </div>
             
             <all-quiz></all-quiz>           
