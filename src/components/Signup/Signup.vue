@@ -64,7 +64,7 @@ export default {
         async signup() {
 
             this.userData = this.usersArr.find(item => {
-                return item.email === this.email
+                return item.email === this.email 
             });
 
             this.adminData = this.adminArr.find(item => {

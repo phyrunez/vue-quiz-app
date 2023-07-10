@@ -68,11 +68,11 @@ export default {
         async login() {
            
             this.userData = this.usersArr.find(item => {
-                return item.email === this.email
+                return item.email === this.email && item.password === this.password
             });
 
             this.adminData = this.adminArr.find(item => {
-                return item.email === this.email
+                return item.email === this.email && item.password === this.password
             });
 
             if(this.userData && this.userType === 'user'){
@@ -109,7 +109,7 @@ export default {
 
                 return
             }else {
-                alert("Email doesn't Exist, Please Signup with the system!!")
+                alert("Invalid details - check the email or password entered and make sure it is correct!!")
                 return
             }
             

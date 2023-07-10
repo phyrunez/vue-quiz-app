@@ -45,9 +45,8 @@ const actions = {
         })
         .catch(error => {
             // console.log('Something went wrong - Please make sure to login with the correct')
-            if(error.response) {
-                console.log(error.resp.data)
-            }
+            alert(error)
+            return
         })
 
     },
