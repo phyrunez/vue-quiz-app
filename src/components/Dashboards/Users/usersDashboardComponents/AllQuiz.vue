@@ -66,12 +66,12 @@ export default {
     methods: {
         startTimedQuiz(id, sess) {
             localStorage.setItem('Current Session', sess.url)
-            this.$router.push("users/" + id)
+            this.$router.push("users/quiz/" + id)
         },
 
         startUntimedQuiz(id, sess) {
             localStorage.setItem('Current Session', sess.url)
-            this.$router.push("users/" + id)
+            this.$router.push("users/quiz/" + id)
         }
     },
     mounted() {

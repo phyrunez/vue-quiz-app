@@ -47,7 +47,7 @@ const routes = [
         component: UsersDashboard,
       },
       {
-        path: "users/:id",
+        path: "users/quiz/:id",
         name: "question-session",
         component: QuestionSession,
       }

@@ -65,7 +65,7 @@ export default {
     }, 
 
     methods: {
-        login() {
+        async login() {
            
             this.userData = this.usersArr.find(item => {
                 return item.email === this.email
@@ -77,7 +77,7 @@ export default {
 
             if(this.userData && this.userType === 'user'){
                 try {
-                    this.$store.dispatch('auth/login', {
+                    await this.$store.dispatch('auth/login', {
                         email: this.email,
                         password: this.password,
                         displayName: this.userType
@@ -92,7 +92,7 @@ export default {
                 return
             }else if (this.adminData && this.userType === 'admin') {
                 try {
-                    this.$store.dispatch('auth/login', {
+                    await this.$store.dispatch('auth/login', {
                         email: this.email,
                         password: this.password,
                         displayName: this.userType

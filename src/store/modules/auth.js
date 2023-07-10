@@ -5,7 +5,8 @@ const state = {
     token: null,
     tokenExpiration: null,
     displayName: null,
-    success_msg: "Successfully logged in to the system",
+    login_success_msg: "Successfully logged in to the system",
+    signup_success_msg: "Successfully registered with the system",
     User: []
 }
 
@@ -39,12 +40,14 @@ const actions = {
                 displayName: resp.displayName
             })
             
-            alert(state.success_msg)
+            alert(state.login_success_msg)
             
         })
         .catch(error => {
-            console.log('Something went wrong - Please make sure to login with the correct')
-
+            // console.log('Something went wrong - Please make sure to login with the correct')
+            if(error.response) {
+                console.log(error.resp.data)
+            }
         })
 
     },
@@ -60,15 +63,6 @@ const actions = {
             
         })
         .then(resp => {
-            // if(resp.status === 400) {
-            //     const error = "Something went wrong, Please Check that you are not using a registered details";
-            //     alert(error)
-            //     throw new Error(error);
-            // }else {
-            //     const data = resp
-               
-            //     return data
-            // }
             
             const data = resp
             console.log(data.data)
@@ -81,7 +75,7 @@ const actions = {
                 tokenExpiration: data.expiresIn
             })
 
-            alert(state.success_msg)
+            alert(state.signup_success_msg)
             this.router.push("/dashboard/admin")
         })
         .catch(error => {

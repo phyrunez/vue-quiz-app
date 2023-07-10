@@ -58,7 +58,7 @@
                             </tbody>
                         </table>
                         <div class="summaryBtns">
-                                <button class="btnWelcome  mt-2" id="welcome_page"><router-link to="/dashboard/users">Go back</router-link></button>
+                            <button class="btnWelcome  mt-2" id="welcome_page"><router-link to="/dashboard/users">Go back</router-link></button>
                         </div>
                     </main>
                 </result-modal>
