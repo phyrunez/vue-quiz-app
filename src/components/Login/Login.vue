@@ -1,7 +1,7 @@
 <template>
     <jumbotron-slot>
         <h3>Login to your Account</h3>
-        <form @submit.prevent="login">
+        <form @submit.prevent="loginUsers">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input class="form-control fs-4" type="email" placeholder="Enter Email" v-model="email" required />
@@ -30,7 +30,7 @@
 
 <script>
 import axios from "axios"
-
+import firebase from "firebase"
 export default {
     data() {
         return {
@@ -64,60 +64,77 @@ export default {
         })
     }, 
 
+    // mounted() {
+
+    //     loginUsers()
+    // },
+
     methods: {
-        async login() {
+        loginUsers() {
+            firebase.auth()
+            .signInWithEmailAndPassword(this.email, this.password)
+            .then(() => {
+                if(this.userType === 'user') {
+                    this.$router.replace({ name: 'users' })
+                }else if (this.userType === 'admin') {
+                    this.$router.replace({ name: 'admin' })
+                }
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+        },
+
+        // async login() {
            
-            this.userData = this.usersArr.find(item => {
-                return item.email === this.email && item.password === this.password
-            });
+        //     this.userData = this.usersArr.find(item => {
+        //         return item.email === this.email && item.password === this.password
+        //     });
 
-            this.adminData = this.adminArr.find(item => {
-                return item.email === this.email && item.password === this.password
-            });
+        //     this.adminData = this.adminArr.find(item => {
+        //         return item.email === this.email && item.password === this.password
+        //     });
 
-            if(this.userData && this.userType === 'user'){
-                try {
-                    await this.$store.dispatch('auth/login', {
-                        email: this.email,
-                        password: this.password,
-                        displayName: this.userType
-                    })
-
-
-                    this.$store.getters["users/allUsers"];
-                    this.$router.replace({ name: "users" });
-                } catch {err =>
-                    console.log(err.message)               
-                }
-                return
-            }else if (this.adminData && this.userType === 'admin') {
-                try {
-                    await this.$store.dispatch('auth/login', {
-                        email: this.email,
-                        password: this.password,
-                        displayName: this.userType
-                    })
+        //     if(this.userData && this.userType === 'user'){
+        //         try {
+        //             await this.$store.dispatch('auth/login', {
+        //                 email: this.email,
+        //                 password: this.password,
+        //                 displayName: this.userType
+        //             })
 
 
-                    this.$store.getters["admin/AllAdmin"];
-                    this.$router.replace({ name: "admin" });
+        //             this.$store.getters["users/allUsers"];
+        //             this.$router.replace({ name: "users" });
+        //         } catch {err =>
+        //             console.log(err.message)               
+        //         }
+        //         return
+        //     }else if (this.adminData && this.userType === 'admin') {
+        //         try {
+        //             await this.$store.dispatch('auth/login', {
+        //                 email: this.email,
+        //                 password: this.password,
+        //                 displayName: this.userType
+        //             })
 
-                } catch {
-                    err =>
-                    console.log(err.message)
-                }
 
-                return
-            }else {
-                alert("Invalid details - check the email or password entered and make sure it is correct!!")
-                return
-            }
+        //             this.$store.getters["admin/AllAdmin"];
+        //             this.$router.replace({ name: "admin" });
+
+        //         } catch {
+        //             err =>
+        //             console.log(err.message)
+        //         }
+
+        //         return
+        //     }else {
+        //         alert("Invalid details - check the email or password entered and make sure it is correct!!")
+        //         return
+        //     }
             
-        }
+        // }
     },
 
-    // updated() {
-    //     console.log(this.$store.dispatch('auth/signup'))
-    // },
 }
 </script>
